@@ -1,0 +1,555 @@
+# Using R as a scientific calculator
+
+5+6
+3*2
+1/0
+
+num<- 6
+num^2
+
+num
+
+num<-num^2*5+10/3
+num
+
+# Operating on vectors
+
+x<- 1:5
+x
+
+y<-c(6,7,8,9,10)
+y
+
+z<- x+y
+z
+
+c(1,3,5,7,9)*2
+
+c(1,3,5,7,9)*c(2,4)
+
+factorial(1:5)
+
+exp(2:10)
+
+cos(c(0,pi/4))
+
+sqrt(c(1,4,9,16))
+
+sum(1:10)
+
+# Special Values
+
+1/0
+0/0
+Inf/Inf
+log(Inf)
+Inf+NA
+
+vec<- c(0, Inf, NaN, NA)
+is.finite(vec)
+
+is.nan(vec)
+is.na(vec)
+is.infinite(vec)
+
+# Data Structures In R
+# Vectors: Creating vectors
+
+c(2.5:4.5,6,7,c(8,9,10),c(12:15))
+
+vector("numeric",5)
+
+logical(5)
+
+seq.int(1,10)
+
+seq.int(1,10,2)
+
+seq_len(10)
+
+# Indexing and naming vectors
+
+vec<- c("R","Python","Julia","Haskell","Java","Scala")
+vec[1]
+
+vec[2:4]
+
+vec[c(1,3,5)]
+
+num<-c(5,8,10,NA,3,11)
+
+num
+
+which.min(num)
+
+which.max(num)
+
+num[which.min(num)]
+
+num[which.max(num)]
+
+c(first=1, second=2, third=3, fourth=4, fifth=5)
+
+positions<-c(1,2,3,4,5)
+
+names(positions)
+
+names(positions)<- c("first","second","third","fourth","fifth")
+names(positions)
+
+positions[c("second","fourth")]
+
+# Arrays and matrices
+# Creating arrays and matrices
+
+three.dim.array <- array(
+  1:32,    # input data
+  dim = c(4, 3, 3),   # dimensions
+  dimnames = list(    # names of dimensions
+    c("row1", "row2", "row3", "row4"),
+    c("col1", "col2", "col3"),
+    c("first.set", "second.set", "third.set")
+  )
+)
+
+three.dim.array
+
+mat <- matrix(
+  1:24,   # data
+  nrow = 6,  # num of rows
+  ncol = 4,  # num of columns
+  byrow = TRUE  # fill the elements row-wise
+)
+
+mat
+
+# Names and dimensions
+
+
+dimnames(three.dim.array)
+
+rownames(three.dim.array)
+
+colnames(three.dim.array)
+
+dimnames(mat)
+
+rownames(mat)
+
+rownames(mat)<-c("r1","r2","r3","r4","r5","r6")
+colnames(mat)<-c("c1","c2","c3","c4")
+
+dimnames(mat)
+
+mat
+
+dim(three.dim.array)
+
+nrow(three.dim.array)
+
+ncol(three.dim.array)
+
+length(three.dim.array)
+
+dim(mat)
+
+ncol(mat)
+
+nrow(mat)
+
+length(mat)
+
+# Matrix operations
+
+mat1 <- matrix(
+  1:15,
+  nrow = 5,
+  ncol = 3,
+  byrow = TRUE,
+  dimnames = list(
+    c("M1.r1", "M1.r2", "M1.r3", "M1.r4", "M1.r5")
+    ,c("M1.c1", "M1.c2", "M1.c3")
+  )
+)
+
+mat1
+
+mat2 <- matrix(
+  16:30,
+  nrow = 5,
+  ncol = 3,
+  byrow = TRUE,
+  dimnames = list(
+    c("M2.r1", "M2.r2", "M2.r3", "M2.r4", "M2.r5"),
+    c("M2.c1", "M2.c2", "M2.c3")
+  )
+)
+
+mat2
+
+rbind(mat1, mat2)
+
+cbind(mat1,mat2)
+
+c(mat1,mat2)
+
+c(mat1,mat2)
+
+mat1+mat2
+
+mat1*mat2
+
+tmat2<-t(mat2)
+
+tmat2
+
+mat1 %*% tmat2
+
+m<- matrix(c(5,-3,2,4,12,-1,9,14,7),nrow=3,ncol=3)
+
+m
+
+inv.m <- solve(m)
+
+inv.m
+
+round(m %*% inv.m)
+
+# Lists
+# Creating and indexing lists
+
+list.sample <- list(
+  1:5,
+  c("first", "second", "third"),
+  c(TRUE, FALSE, TRUE, TRUE),
+  cos,
+  matrix(1:9, nrow = 3, ncol = 3)
+)
+
+list.sample
+
+list.with.names <- list(
+  even.nums = seq.int(2,10,2),
+  odd.nums  = seq.int(1,10,2),
+  languages = c("R", "Python", "Julia", "Java"),
+  cosine.func = cos
+)
+
+list.with.names
+
+list.with.names$cosine.func
+
+list.with.names$cosine.func(pi)
+
+list.sample[[4]]
+
+list.sample[[4]](pi)
+
+list.with.names$odd.nums
+
+list.sample[[1]]
+
+list.sample[[3]]
+
+# Combining and converting lists
+
+l1 <- list(
+  nums = 1:5,
+  chars = c("a", "b", "c", "d", "e"),
+  cosine = cos
+)
+
+l2 <- list(
+  languages = c("R", "Python", "Java"),
+  months = c("Jan", "Feb", "Mar", "Apr"),
+  sine = sin
+)
+
+l3<-c(l1,l2)
+l3
+
+l1<-1:5
+class(l1)
+list.l1<- as.list(l1)
+class(list.l1)
+list.l1
+
+unlist(list.l1)
+
+## Data frames 
+# Creating data frames
+
+df <- data.frame(
+  real.name = c("Bruce Wayne", "Clark Kent", "Slade Wilson", "Tony Stark", "Steve Rogers"),
+  superhero.name = c("Batman", "Superman", "Deathstroke", "Iron Man", "Capt. America"),
+  franchise = c("DC", "DC", "DC", "Marvel", "Marvel"),
+  team = c("JLA", "JLA", "Suicide Squad", "Avengers", "Avengers"),
+  origin.year = c(1939, 1938, 1980, 1963, 1941)
+)
+
+df
+
+class(df)
+
+str(df)
+
+rownames(df)
+
+colnames(df)
+
+dim(df)
+
+head(mtcars)
+
+# Operating on data frames
+
+df[2:4,]
+
+df[2:4,1:2]
+
+subset(df, team=="JLA", c(real.name, superhero.name, franchise))
+
+subset(df, team %in% c("Avengers","Suicide Squad"),
+       c(real.name,superhero.name,franchise))
+
+df1 <- data.frame(
+  id = c('emp001', 'emp003', 'emp007'),
+  name = c('Harvey Dent', 'Dick Grayson', 'James Bond'),
+  alias = c('TwoFace', 'Nightwing', 'Agent 007')
+)
+
+df1
+
+df2 <- data.frame(
+  id = c('emp001', 'emp003', 'emp007'),
+  location = c('Gotham City', 'Gotham City', 'London'),
+  speciality = c('Split Persona', 'Expert Acrobat', 'Gadget Master')
+)
+
+df2
+
+rbind(df1,df2)
+
+cbind(df1,df2)
+
+merge(df1,df2,by="id")
+
+## Working with functions
+# Built-in functions
+
+sqrt(5)
+
+sqrt(c(1,2,3,4,5,6,7,8,9,10))
+
+mean(c(1,2,3,4,5,6,7,8,9,10))
+
+median(c(1,2,3,4,5,6,7,8,9,10))
+
+# User-defined functions
+
+square <- function(data){
+  return (data^2)
+}
+
+square(5)
+
+square(c(1,2,3,4,5))
+
+point <- function(xval, yval){
+  return (c(x=xval,y=yval))
+}
+
+p1<-point(5,6)
+p2<- point(2,3)
+
+p1
+p2
+
+# Passing functions as arguments
+
+euclidean.distance <- function(point1, point2, square.func){
+  distance <- sqrt(
+    as.integer(
+      square.func(point1['x'] - point2['x'])
+    ) +
+      as.integer(
+        square.func(point1['y'] - point2['y'])
+      )
+  )
+  return (c(distance=distance))
+}
+
+euclidean.distance(point1=p1,point2 = p2,square.func = square)
+
+euclidean.distance(point1 = p2, point2 = p1, square.func = square)
+
+euclidean.distance(point1 = point(10,3),point2 = point(-4,8),
+                   square.func = square)
+
+
+## Controlling code flow
+# Working with if, if-else, and ifelse
+
+num = 5
+if (num == 5){
+  cat('The number was 5')
+}
+
+num = 7
+if (num == 5){
+  cat('The number was 5')
+} else{
+  cat('The number was not 5')
+}
+
+if (num == 5){
+  cat('The number was 5')
+} else if (num == 7){
+  cat('The number was 7')
+} else{
+  cat('No match found')
+}
+
+ifelse(num==5,"Number was 5","Number was not 5")
+
+# Working with switch
+
+switch(
+  "first",
+  first = "1st",
+  second = "2nd",
+  third = "3rd",
+  "No position"
+)
+
+switch(
+  "third",
+  first = "1st",
+  second = "2nd",
+  third = "3rd",
+  "No position"
+)
+
+switch(
+  "fifth",
+  first = "1st",
+  second = "2nd",
+  third = "3rd",
+  "No position"
+)
+
+# Loops
+
+for (i in 1:10){
+  cat(paste(i," "))
+}
+
+sum = 0
+for (i in 1:10){
+  sum <- sum + i
+}
+sum
+
+count <- 1
+while (count <= 10){
+  cat(paste(count, " "))
+  count <- count + 1
+}
+
+count = 1
+repeat{
+  cat(paste(count, " "))
+  if (count >= 10){
+    break  # break off from the infinite loop
+  }
+  count <- count + 1
+}
+
+## Advanced constructs
+# lapply and sapply
+
+lapply
+
+nums<-list(l1=c(1,2,3,4,5,6,7,8,9,10),l2=1000:1020)
+
+lapply(nums,mean)
+
+#sapply
+
+data<- list(l1=1:10, l2=runif(10), l3=rnorm(10,2))
+data
+
+lapply(data,mean)
+
+sapply(data,mean)
+
+# apply
+
+mat<- matrix(rnorm(20),nrow=5, ncol=4)
+mat
+
+#row sums
+apply(mat,1,sum)
+rowSums(mat)
+
+# row means
+
+apply(mat,1,mean)
+rowMeans(mat)
+
+#col sums
+
+apply(mat,2,sum)
+colSums(mat)
+
+apply(mat,2,mean)
+colMeans(mat)
+
+#row quantiles
+
+apply(mat,1,quantile, probs=c(0.25,0.5,0.75))
+
+#tapply 
+
+data <-c(1:10,rnorm(10,2), runif(10))
+data
+
+groups<- gl(3,10)
+groups
+
+tapply(data,groups,mean)
+
+tapply(data,groups,mean, simplify=FALSE)
+
+tapply(data,groups,range)
+
+#mapply
+
+list(rep(1,4), rep(2,3), rep(3,2), rep(4,1))
+
+mapply(rep, 1:4,4:1)
+
+
+
+
+
+
+## Next steps with R
+
+help.start()
+
+help("apply")
+?apply
+
+??apply
+
+# Handling packages
+
+install.packages("caret")
+
+library(caret)
+
+require(caret)
+
+
+
