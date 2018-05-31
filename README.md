@@ -25,7 +25,7 @@ Basic knowledge of R
 Prior experience of machine learning would be helpful but is not necessary.
 ### Technical Requirements
 This course has the following software requirements:<br/>
-R 3.5.0
+R 3.5.0<br/>
 R Studio 1.1.447
 
 ## Related Products
